@@ -1,0 +1,60 @@
+= f.hidden_field :lock_version
+
+#avatar
+  = image_tag @staff_profile.staff_avatar.url(:thumb) unless @staff_profile.id.nil?
+  %br
+  %br
+  = f.file_field :staff_avatar
+
+  %p{:style=>"width:200px;padding:0;text-align:left"}
+    = f.check_box(:delete_staff_avatar, :style=>"display:inline") +" "+ f.label(:delete_staff_avatar, 'Delete Picture', :style=>"display:inline")
+
+.form_area
+  
+  %p.firstname
+    = f.label :firstname, "Firstname"
+    = f.text_field :firstname, :class => 'textbox activate', :size => 32, :maxlength => 100 
+
+  %p.lastname
+    = f.label :lastname, "Lastname"
+    = f.text_field :lastname, :class => 'textbox', :size => 32, :maxlength => 100 
+
+  %p.position
+    = f.label :position, "Position"
+    = f.select :position, StaffProfile.available_positions, :include_blank => true
+
+  - unless @staff_profile.position.nil?
+    - if @staff_profile.position.strip == "PA"
+      %p.position_extra
+        = f.label :position_extra, "Position Detail"
+        = f.text_field :position_extra, :class => 'textbox', :size => 32, :maxlength => 100 
+  
+
+  %p.mobile
+    = f.label :mobile, "Mobile"
+    = f.text_field :mobile, :class => 'textbox', :size => 32, :maxlength => 100 
+
+  %p.email
+    = f.label :email, "Email"
+    = f.text_field :email, :class => 'textbox', :size => 32, :maxlength => 100 
+
+  %p.twitter
+    = f.label :twitter_username, "Twitter"
+    = f.text_field :twitter_username, :class => 'textbox', :size => 32, :maxlength => 100
+
+  %p.facebook
+    = f.label :facebook_url, "Facebook"
+    = f.text_field :facebook_url, :class => 'textbox', :size => 32, :maxlength => 100
+
+  %p.website
+    = f.label :website, "Website"
+    = f.text_field :website, :class => 'textbox', :size => 32, :maxlength => 100    
+    
+    
+%p.buttons{:style=>"clear: left"}
+  = save_model_button(@staff_profile)
+  = save_model_and_continue_editing_button(@staff_profile)
+  = t('or')
+  = link_to t('cancel'), admin_staff_profiles_path
+
+= updated_stamp @staff_profile

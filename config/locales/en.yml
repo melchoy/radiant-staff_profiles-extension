@@ -1,0 +1,8 @@
+---
+en:
+  staff_profile: Staff Profile
+  staff_profiles: Staff Profiles
+  config:
+    staff_profiles:  
+      positions: "Positions" 
+  

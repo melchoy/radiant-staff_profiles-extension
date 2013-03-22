@@ -1,0 +1,34 @@
+- @page_title = "Staff Profiles" + ' - ' + default_page_title
+
+.outset
+  
+  %table#snippets.index
+    %thead
+      %tr
+        %th.layout= 'Name' 
+        %th.position= 'Position' 
+        %th.mobile= 'Mobile'
+        %th.email= 'Email'
+        %th.website= 'Website'
+        %th.modify= 'Modify'
+  
+    %tbody
+      - if @staff_profiles
+        - @staff_profiles.each do |profile|
+          %tr.node.level_1
+            %td.layout
+              = image_tag profile.staff_avatar.url(:tiny)
+              = "&nbsp;"
+              %span= link_to profile.fullname, edit_admin_staff_profile_path(:id => profile.id)
+            %td.position= profile.display_position
+            %td.mobile= profile.mobile
+            %td.email= profile.email
+            %td.website= profile.website
+            %td.modify
+              = link_to "Update", edit_admin_staff_profile_path(profile)
+              = link_to "Remove", admin_staff_profile_path(profile), :confirm => 'Are you sure you want to delete this slide?', :method => :delete
+              
+#actions
+  = pagination_for(@staff_profiles)
+  %ul
+    %li= link_to image('plus') + " New Staff Profile", new_admin_staff_profile_path

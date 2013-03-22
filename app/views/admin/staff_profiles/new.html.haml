@@ -1,0 +1,7 @@
+- @page_title = "New Staff Profile - #{default_page_title}"
+- body_classes << 'edit_user'
+
+%h1= "New Staff Profile" 
+
+- form_for [:admin, @staff_profile], :html => {'data-onsubmit_status' => onsubmit_status(@staff_profile)} do |form|
+  = render :partial => 'form', :locals => { :f => form }
